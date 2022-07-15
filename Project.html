@@ -5,11 +5,59 @@
     <style>
         body{
             font-family: '배달의민족 한나체 Air M','BMHANNAPro','굴림';
-            /*background-image: url(보노보노.PNG);*/
+            /*background-image: url(보노보노.PNG);
             background-repeat: no-repeat;
-            background-size: cover;
+            background-size: cover;*/
+            padding: 0;
+            margin: 0;
         }
+
+        ul{
+            position: fixed;
+            list-style: none;
+            font-size: 17pt;
+        }
+        li{
+            padding: 10px 0;
+        }
+        a{
+            text-decoration: none;
+            color: rgb(25, 22, 22); 
+        }
+
+        div#main{
+            width: 100%;
+            height: 100vh;
+        }
+        div#user{
+            width: 100%;
+            height: 100vh;            
+        }
+        div#admin{            
+            width: 100%;
+            height: 100vh;
+        }
+
+        div#movie{
+            position: absolute;
+            width: 100%;
+            background-color: cadetblue;
+            height: 50vh;
+            top: 10vh;
+        }
+
+        div#slide{
+            position: relative;
+            width: 60%;
+            height: 70vh;
+            background-color: bisque;
+            margin: 50px auto;
+            top:20vh;
+        }
+
         div#maker{
+            width: 100%;
+            height: 100vh;
             text-align: center;
         }
         div#namecard{
@@ -22,18 +70,6 @@
             padding: 15px 10px;
             text-align: center;
         }
-        ul{
-            position: fixed;
-            list-style: none;
-            font-size: 17pt;
-        }
-        li{
-            padding: 10px 0;
-        }
-        a{
-            text-decoration: none;
-            color: rgb(25, 22, 22); 
-        } 
     </style>  
 </head>
 <body>
@@ -46,11 +82,26 @@
         </ul>
     </div>
     
-    <div id="main"></div>
-    
-    <div id="user"></div>
+    <div id="main">
 
-    <div id="admin"></div>
+        <div id="movie">
+
+        </div>
+    </div>
+    
+    <div id="user">
+
+        <div id="slide">
+            slide tmp
+        </div>
+    </div>
+
+    <div id="admin">
+
+        <div id="slide">
+            slide tmp
+        </div>
+    </div>
 
     <div id="maker">
         <div id="namecard">서연운 <hr> 깃계정 tjdusdnds@gmail.com </div>
