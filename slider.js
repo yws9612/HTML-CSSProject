@@ -25,7 +25,6 @@ $(document).ready(function() {
       }
   
       
-      animateContentColor();
     });
   
     $('#prev').on('click', function(e) {
@@ -42,7 +41,6 @@ $(document).ready(function() {
       }
   
      
-      animateContentColor();
     });
   
     // Ripple
