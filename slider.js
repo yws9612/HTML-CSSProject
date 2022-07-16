@@ -5,13 +5,7 @@ $(document).ready(function() {
       height: getProductHeight
     });
   
-    function calcProductHeight() {
-      getProductHeight = $('.product.active').height();
-  
-      $('.products').css({
-        height: getProductHeight
-      });
-    }
+    
     
     var productItem = $('.product'),
       productCurrentItem = productItem.filter('.active');
@@ -30,7 +24,7 @@ $(document).ready(function() {
         productCurrentItem = productItem.first().addClass('active');
       }
   
-      calcProductHeight();
+      
       animateContentColor();
     });
   
@@ -47,7 +41,7 @@ $(document).ready(function() {
         productCurrentItem = productItem.last().addClass('active');
       }
   
-      calcProductHeight();
+     
       animateContentColor();
     });
   
