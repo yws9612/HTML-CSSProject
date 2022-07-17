@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">  
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+        @font-face{
+            src: url("font/BMHANNAPro.ttf");
+            font-family: "HannaPro";
+        }
+        body{
+            font-family: "HannaPro",'굴림';
+            background-image: url(./image/배경.PNG);
+            padding: 0;
+            margin: 0;
+            background-size: contain;
+        }
+
+        ul{
+            position: fixed;
+            list-style: none;
+            font-size: 17pt;
+            left: 5vh;
+            top: 3vh;
+        }
+        li{
+            padding: 10px 0;
+            background-color: rgba(0, 36, 70, 0.672);
+        }
+        a{
+            text-decoration: none;
+            color: rgb(255, 255, 255); 
+        }
+
+        a.color{
+            color: rgb(25, 22, 22); 
+            text-decoration: underline;
+        }
+
+        div#main{   
+            width: 100%;
+            height: 100vh;
+        }
+        div#user{
+            padding-left: 15vh; 
+            width: calc(100% - 15vh);
+            height: 100vh;  
+        }
+        div#admin{
+            padding-left: 15vh;  
+            width: calc(100% - 15vh);
+            height: 100vh;
+        }
+
+        /* div#movie{
+            position: relative;
+            width: 100%;
+            background-color: cadetblue;
+            height: 640px;
+            top: 10vh;
+        } */
+
+        div#slide{
+            position: relative;
+            width: 60%;
+            height: 85vh;
+            margin: 50px auto;
+            top:12vh;
+            line-height: 1.6em;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            transition: 0.5s ease;
+        }
+
+        div#maker{
+            padding-top:20vh;
+            padding-left: 15vh; 
+            width: calc(100% - 15vh);
+            height: 100vh;
+            text-align: center;
+        }
+        div#namecard{
+            font-size: 12pt;
+            display: inline-block; 
+            width: 300px; 
+            height:fit-content;
+            margin: 10px 10px;
+            background-color: rgb(226, 216, 255);
+            padding: 15px 10px;
+            text-align: center;
+        }
+
+        footer>div{
+            clear: both;
+            width: 181.7vh;
+            height: 150px;
+            position : relative;
+            padding-left: 200px;
+            font-size: 12px;
+            text-align: left;
+            background-color: rgb(38, 0, 61);
+            color: silver;
+        }
+
+
+        .btn {
+            border-radius: 2px;
+            padding: 8px 12px;
+            color: #D18B49;
+            font-size: 14px;
+            font-weight: 500;
+            text-decoration: none;
+            text-transform: uppercase;
+            transition: 0.5s ease;
+        }
+
+        .card {
+            background: #FFFFFF;
+            width: 100%;
+            height: 100%;
+            margin: 0px auto;
+            border-radius: 12px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+            box-sizing: border-box;
+            padding: 48px;
+            text-align: center;
+        }
+        .cards {
+            background: #FFFFFF;
+            width: 100%;
+            height: 100%;
+            margin: 0px auto;
+            border-radius: 12px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+            box-sizing: border-box;
+            padding: 48px;
+            text-align: center;
+        }
+
+
+        .productsss {
+            position: relative;
+            margin: 0 auto;
+            overflow: hidden;
+            transition: 0.5s ease;
+        }
+
+        .productss {
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            visibility: hidden;
+            transition: 0.5s ease;
+            width: 100%;
+        }
+
+        .productss.active {
+            opacity: 1;
+            visibility: visible;
+            width: 100%;
+        }
+        .products {
+            position: relative;
+            margin: 0 auto;
+            overflow: hidden;
+            transition: 0.5s ease;
+        }
+
+        .product {
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            visibility: hidden;
+            transition: 0.5s ease;
+            width: 100%;
+        }
+
+        .product.active {
+            opacity: 1;
+            visibility: visible;
+            width: 100%;
+        }
+
+        .thumbnail {
+            margin: 0 0 20px;
+        }
+
+        .title {
+            margin: 0 0 12px;
+            color: #D18B49;
+            font-size: 24px;
+            transition: 0.5s ease;
+        }
+
+        .description {
+            margin: 0 30px 48px;
+            color: rgb(25, 22, 22); 
+        }
+
+        .footer {
+            position: absolute;
+            top: 87.5%;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            width: calc(100% - 96px);
+        }
+
+        [ripple] {
+            z-index: 1;
+            position: relative;
+            overflow: hidden;
+        }
+
+        [ripple] .ripple {
+            position: absolute;
+            background: #FFFFFF;
+            width: 60px;
+            height: 60px;
+            border-radius: 100%;
+            transform: scale(0);
+            animation: ripple 2s;
+        }
+        @keyframes ripple {
+            0% {
+                transform: scale(0);
+                opacity: 0.2;
+            }
+
+            100% {
+                transform: scale(20);
+                opacity: 0;
+            }
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script type="text/javascript" src="slider.js"></script>  
+    <script type="text/javascript" src="sliders.js"></script>  
+</head>
+<body>
+    
+    <div id="main">
+
+        <div id="movie">
+            <video width="100%" height="auto" autoplay loop muted> <source src="image/비디오_메인.mp4" type="video/mp4"> 대체 텍스트</video>
+        </div>
+    </div>
+    
+    <div id="user">
+
+        <div id="slide">
+            <div class="cards">
+                <div class="productsss">
+                    <div class="productss active" product-id="1" product-color="#D18B49">
+                        <div class="thumbnail"><img src="./image/login.png"/></div>
+                        <h1 class="title">로그인</h1>   
+                        <a href="./codepage/JAVA_login.html">
+                            <span class="description">#자바코드</span>
+                        </a>
+                    </div>
+                    <div class="productss" product-id="2" product-color="#542F13">
+                        <div class="thumbnail"><img src="./image/signup.png"/></div>
+                        <h1 class="title">회원가입</h1>
+                        <a href="./codepage/JAVA_id_check.html">
+                            <span class="description">#아이디 확인</span>
+                        </a>
+                        <a href="./codepage/JAVA_email_check.html">
+                            <span class="description">#이메일 확인</span>
+                        </a>
+                        <a href="./codepage/JAVA_callprocedure_signup.html">
+                            <span class="description">#프로시저 호출</span>
+                        </a><br>    
+                        <a href="./codepage/DB_function_check_id.html">
+                            <span class="description">#아이디 확인_DB</span>
+                        </a>
+                        <a href="./codepage/DB_function_check_email.html">
+                            <span class="description">#이메일 확인_DB</span>
+                        </a>
+                        <a href="./codepage/DB_procedure_signup.html">
+                            <span class="description">#회원가입 프로시져_DB</span>
+                        </a>
+                    </div>
+                    <div class="productss" product-id="3" product-color="#A5AAAE">
+                        <div class="thumbnail"><img src="./image/find_id.png"/></div>
+                        <h1 class="title">아이디 찾기</h1>
+                        <a href="./codepage/JAVA_findId.html">
+                            <span class="description">#아이디 찾기</span>
+                        </a>
+                    </div>
+                    <div class="productss" product-id="4" product-color="#ED8D1F">
+                        <div class="thumbnail"><img src="./image/find_pw.png"/></div>
+                        <h1 class="title">비밀번호 찾기</h1>
+                        <a href="./codepage//JAVA_findPw.html">
+                            <span class="description">#비밀번호 찾기</span>
+                        </a>
+                    </div>
+                    <div class="productss" product-id="5" product-color="#C4C8CB">
+                        <div class="thumbnail"><img src="./image/select_user.png" width="800"/>
+                        </div>
+                        <h1 class="title">게임 및 순위 선택창</h1>
+                    </div>
+                    <div class="productss" product-id="6" product-color="#C4C8CB">
+                        <div class="thumbnail"><img src="./image/game.png" width="800"/>
+                        </div>
+                        <h1 class="title">게임</h1>
+                        <a href="./codepage/JAVA_getword.html">
+                            <span class="description">#단어 가져오기</span>
+                        </a>
+                        <a href="./codepage/JAVA_grading_and_life.html">
+                            <span class="description">#채점 및 목숨관리</span>
+                        </a>
+                        <a href="./codepage/JAVA_grading.html">
+                            <span class="description">#채점부</span>
+                        </a>
+                        <a href="./codepage/JAVA_callprocedure_playlog.html">
+                            <span class="description">#점수 등록</span>
+                        </a>
+                        <a href="./codepage/DB_trigger_after_play.html">
+                            <span class="description">#종료 후 트리거_DB</span>
+                        </a>
+                    </div>
+                    <div class="productss" product-id="7" product-color="#C4C8CB">
+                        <div class="thumbnail"><img src="./image/ranking.png" width="800"/>
+                        </div>
+                        <h1 class="title">순위</h1>
+                        <a href="./codepage/JAVA_ranking.html">
+                            <span class="description">#순위창</span>
+                        </a>
+                        <a href="./codepage/JAVA_JTable.html">
+                            <span class="description">#J테이블</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="footer"><a class="btn" id="prevss" href="#" ripple="" ripple-color="#666666">이전</a><a class="btn"
+                        id="nextss" href="#" ripple="" ripple-color="#666666">다음</a></div>
+            </div>
+        </div>
+        </div>
+    </div>
+
+    <div id="admin">
+
+        <div id="slide">
+            <div class="card">
+                <div class="products">
+                    <div class="product active" product-id="1" product-color="#D18B49">
+                        <div class="thumbnail"><img src="./image/admin_login.png" width="400"/></div>
+                        <h1 class="title">관리자 로그인</h1>
+                    </div>
+                    <div class="product" product-id="2" product-color="#542F13">
+                        <div class="thumbnail"><img src="./image/select_admin.png" width="800"/></div>
+                        <h1 class="title">관리자 선택창</h1>
+                    </div>
+                    <div class="product" product-id="3" product-color="#A5AAAE">
+                        <div class="thumbnail"><img src="./image/admin_member.png" width="800"/></div>
+                        <h1 class="title">회원 관리</h1>
+                        <a href="./codepage/JAVA_administrator_delete.html">
+                            <span class="description">#회원 삭제</span>
+                        </a>
+                        <a href="./codepage/DB_sequence.html">
+                            <span class="description">#회원번호 시퀀스_DB</span>
+                        </a>
+                        
+                    </div>
+                    <div class="product" product-id="4" product-color="#ED8D1F">
+                        <div class="thumbnail"><img src="./image/admin_word.png" width="800"/></div>
+                        <h1 class="title">단어 관리</h1>
+                        <a href="./codepage/JAVA_addWord.html">
+                            <span class="description">#단어 추가</span>
+                        </a>
+                        <a href="./codepage/JAVA_deleteWord.html">
+                            <span class="description">#단어 삭제</span>
+                        </a>
+                        <a href="./codepage/DB_sequence.html">
+                            <span class="description">#단어번호 시퀀스_DB</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="footer"><a class="btn" id="prev" href="#" ripple="" ripple-color="#666666">이전</a><a class="btn"
+                        id="next" href="#" ripple="" ripple-color="#666666">다음</a></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="maker">
+        <div id="namecard">
+            <img src="./image/미모티콘_연운.png" width="120"/>
+            <br>
+            서연운 
+            <hr> 
+            깃허브 <a href = "https://github.com/yws9612" class="color">yws9612</a>
+            <br>
+            Gmail demassia13@gmail.com
+        </div>
+        <br>
+        <div id="namecard">
+            <img src="./image/미모티콘_종주.png" width="120"/>
+            <br>
+            문종주 
+            <hr> 
+            깃허브 <a href = "https://github.com/admoonistrator" class="color">admoonistrator</a>
+            <br>
+            Gmail 91christian83@gmail.com
+        </div>
+        <div id="namecard">
+            <img src="./image/미모티콘_송이.png" width="120"/>
+            <br>
+            이송이 
+            <hr> 
+            깃허브 <a href = "https://github.com/nonameleel" class="color">nonameleel</a>
+            <br>
+            Gmail xcvm92@gmail.com
+        </div>
+        <div id="namecard">
+            <img src="./image/미모티콘_윤경.png" width="120"/>
+            <br>
+            이윤경 
+            <hr> 
+            깃허브 <a href = "https://github.com/yiyk7" class="color">yiyk7</a>
+            <br>
+            Gmail hoppyk173@gmail.com
+        </div>
+        <br>
+        <div id="namecard">
+            <img src="./image/미모티콘_서영.png" width="120"/>
+            <br>
+            최서영 
+            <hr> 
+            깃허브 <a href = "https://github.com/seoyoung1029" class="color">seoyoung</a>
+            <br>
+            Gmail seoyoung9710@gmail.com
+        </div>
+        <div id="namecard">
+            <img src="./image/미모티콘_용학.png" width="120"/>
+            <br>
+            황용학 
+            <hr> 
+            깃허브 <a href = "https://github.com/YONGHYNG" class="color">YONGHYNG</a>
+            <br>
+            Gmail a01025932320@gmail.com
+        </div>
+    </div>
+
+    <footer>
+        <div>
+        <table cellspacing="5">
+            <thead >
+              <tr>
+                <th scope="col" colspan="2" style = "border-bottom: 2pt solid silver; font-size: 14px;">
+                    © 2022 PROJECT TEAM 5DLE. ALL RIGHTS RESERVED / Actual Duration 2022. 06. 20. ~ 2022. 07. 05.
+                </th>
+              </tr>
+            </thead>
+    
+            <tbody>
+              <tr>
+                <th scope="row">서연운</th>
+                <td>"조장하실?"</td>
+              </tr>
+              <tr>
+                <th scope="row">문종주</th>
+                <td>"올바르게 작동하지 않는다고 걱정하지 마라. 모든게 잘 되었다면, 내가 할 일이 없어진다."</td>
+              </tr>
+              <tr>
+                <th scope="row">이송이</th>
+                <td>"나는 코딩한다. 고로 나는 존재한다"</td>
+              </tr>
+              <tr>
+                <th scope="row">이윤경</th>
+                <td>"오늘 밤샜다고 너무 힘들어 하지 마세요. 어차피 내일도 밤샐거니까요"</td>
+              </tr>
+              <tr>
+                <th scope="row">최서영</th>
+                <td>"프로젝트가 나에게 걸어온다. 밤샘이 나에게로 걸어온다"</td>
+              </tr>
+              <tr>
+                <th scope="row">황용학</th>
+                <td>"저녁부터 아침까지 아찔한 밤샘을 계속하였다. 개발이었다."</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+    </footer>
+
+
+
+    
+    <div id="list">
+        <ul>
+            <li><a href="#main">한말글 알기내기</a></li>
+            <li><a href="#user">회원</a></li>
+            <li><a href="#admin">관리자</a></li>
+            <li><a href="#maker">만든이</a></li>
+        </ul>
+    </div>
+</body>
+</html>
